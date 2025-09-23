@@ -1,0 +1,12 @@
+class Solution:
+    def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        def dfs(l, r, d):
+            if not l:
+                return
+            if d & 1:
+                l.val, r.val = r.val, l.val
+            dfs(l.left, r.right, d + 1)
+            dfs(l.right, r.left, d + 1)
+        if root and root.left and root.right:
+            dfs(root.left, root.right, 1)
+        return root
